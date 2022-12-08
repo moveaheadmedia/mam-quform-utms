@@ -64,10 +64,12 @@ add_action('quform_pre_display', function (Quform_Form $form) {
     <script>
         jQuery(document).ready(function($){
             $(window).load(function(){
+                const currentDate = new Date();
+                const timestamp = currentDate.getTime();
                 var data = {
                     'action': 'mam_get_session'
                 };
-                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>?nocache=' + time(), data, function(response) {
+                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>?nocache=' + timestamp, data, function(response) {
                     var data = JSON.parse(response);
                     <?php
                     foreach ($utm_source as $element_name){
