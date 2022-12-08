@@ -67,7 +67,7 @@ add_action('quform_pre_display', function (Quform_Form $form) {
                 var data = {
                     'action': 'mam_get_session'
                 };
-                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>?nocache=' + time(), data, function(response) {
                     var data = JSON.parse(response);
                     <?php
                     foreach ($utm_source as $element_name){
