@@ -9,39 +9,33 @@
  * Requires jQuery to be installed and ACF Pro plugin
  */
 
-// Save UTMs in session
+// Save UTMs in cookies
 add_action('wp', function () {
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+    $time = time() + (86400 * 30);
     if (isset($_GET['utm_source']) && $_GET['utm_source'] != '') {
-        $_SESSION['user_utm_source'] = $_GET['utm_source'];
+        setcookie('user_utm_source', $_GET['utm_source'], $time, "/");
     }else{
-        if(!isset($_SESSION['user_utm_source'])){
-            $_SESSION['user_utm_source'] = 'Direct';
+        if(!isset($_COOKIE['user_utm_source'])){
+            setcookie('user_utm_source', 'Direct', $time, "/");
         }
     }
     if (isset($_GET['utm_medium']) && $_GET['utm_medium'] != '') {
-        $_SESSION['user_utm_medium'] = $_GET['utm_medium'];
+        setcookie('user_utm_medium', $_GET['utm_medium'], $time, "/");
     }else{
-        if(!isset($_SESSION['user_utm_medium'])){
-            $_SESSION['user_utm_medium'] = '-';
+        if(!isset($_COOKIE['user_utm_medium'])){
+            setcookie('user_utm_medium', '-', $time, "/");
         }
     }
     if (isset($_GET['utm_campaign']) && $_GET['utm_campaign'] != '') {
-        $_SESSION['user_utm_campaign'] = $_GET['utm_campaign'];
+        setcookie('user_utm_campaign', $_GET['utm_campaign'], $time, "/");
     }else{
-        if(!isset($_SESSION['user_utm_campaign'])){
-            $_SESSION['user_utm_campaign'] = '-';
+        if(!isset($_COOKIE['user_utm_campaign'])){
+            setcookie('user_utm_campaign', '-', $time, "/");
         }
     }
 });
 
 add_action('quform_pre_display', function (Quform_Form $form) {
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-
     $utm_source = [];
     $utm_medium = [];
     $utm_campaign = [];
@@ -67,7 +61,7 @@ add_action('quform_pre_display', function (Quform_Form $form) {
                 const currentDate = new Date();
                 const timestamp = currentDate.getTime();
                 var data = {
-                    'action': 'mam_get_session'
+                    'action': 'mam_get_utm_cookies'
                 };
                 jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>?nocache=' + timestamp, data, function(response) {
                     var data = JSON.parse(response);
@@ -96,17 +90,14 @@ add_action('quform_pre_display', function (Quform_Form $form) {
 });
 
 
-add_action( 'wp_ajax_mam_get_session', 'mam_get_session' );
-add_action( 'wp_ajax_nopriv_mam_get_session', 'mam_get_session' );
+add_action( 'wp_ajax_mam_get_utm_cookies', 'mam_get_utm_cookies' );
+add_action( 'wp_ajax_nopriv_mam_get_utm_cookies', 'mam_get_utm_cookies' );
 
-function mam_get_session(){
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+function mam_get_utm_cookies(){
     $results = [];
-    $results['utm_source'] = $_SESSION['user_utm_source'];
-    $results['utm_medium'] = $_SESSION['user_utm_medium'];
-    $results['utm_campaign'] = $_SESSION['user_utm_campaign'];
+    $results['utm_source'] = $_COOKIE['user_utm_source'];
+    $results['utm_medium'] = $_COOKIE['user_utm_medium'];
+    $results['utm_campaign'] = $_COOKIE['user_utm_campaign'];
     echo json_encode($results);
     die();
 }
