@@ -9,8 +9,7 @@ The purpose of this plugin is to allow the website owner to track the UTM values
 
 **Installation and Configuration** 
 
-- Go to https://github.com/moveaheadmedia/mam-quform-utms/releases
-- Download the latest release mam-quform-utms-1.3.zip
+- Download the latest release here https://github.com/moveaheadmedia/mam-quform-utms/releases
 - Install and activate the plugin on your website
 - Add the following hidden fields to your Quform form, the labels must be  `utm_source`, `utm_medium` and `utm_campaign`.
 
