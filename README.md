@@ -1,4 +1,4 @@
-# MAM QUFORM UTMS
+# MAM QUFORM UTMs
 This is a WordPress plugin that is used to track UTMs (Urchin Tracking Module) on a website. UTMs are tags that are added to the end of a URL to identify the source, medium, and campaign of the traffic coming to a website.
 
 This plugin saves the UTMs in cookies on the user's browser when they visit the website. If the UTMs are not present in the URL, the plugin sets the source to "Direct", and medium and campaign to "-".
