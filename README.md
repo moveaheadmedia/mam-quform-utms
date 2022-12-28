@@ -8,6 +8,7 @@ The plugin then adds an action to the quform_pre_display hook, which is called w
 The purpose of this plugin is to allow the website owner to track the UTM values of the users who submit the form, so they can understand where their traffic is coming from and how it is interacting with their website.
 
 **Installation and Configuration** 
+
 1- Go to https://github.com/moveaheadmedia/mam-quform-utms/releases
 2- Download the latest release mam-quform-utms-1.3.zip
 3- Install and activate the plugin on your website
@@ -16,5 +17,6 @@ The purpose of this plugin is to allow the website owner to track the UTM values
 That's it. the plugin will automatically populate those hidden fields with the UTMs data from the users when they submit.
 
 **Changelog v1.3**
+
 - Changed from session to cookies
 - Fixed Direct users not being tracked
