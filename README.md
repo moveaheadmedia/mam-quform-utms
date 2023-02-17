@@ -1,21 +1,38 @@
 # MAM QUFORM UTMs
-This is a WordPress plugin that is used to track UTMs (Urchin Tracking Module) on a website. UTMs are tags that are added to the end of a URL to identify the source, medium, and campaign of the traffic coming to a website.
 
-This plugin saves the UTMs in cookies on the user's browser when they visit the website. If the UTMs are not present in the URL, the plugin sets the source to "Direct", and medium and campaign to "-".
+This is a WordPress plugin "Move Ahead Media UTM To Forms", developed by Move Ahead Media. 
 
-The plugin then adds an action to the quform_pre_display hook, which is called when a form is displayed on the website. This action includes some JavaScript that makes an AJAX request to the server to retrieve the UTM values saved in the cookies. The retrieved UTM values are then used to populate hidden fields in the form with the corresponding label "utm_source", "utm_medium", and "utm_campaign".
+The purpose of this plugin is to allow website owners to track the UTM values of users who submit forms. 
 
-The purpose of this plugin is to allow the website owner to track the UTM values of the users who submit the form, so they can understand where their traffic is coming from and how it is interacting with their website.
+UTM values are used to track the effectiveness of marketing campaigns and traffic sources.
+
+This plugin requires the jQuery library and Quform plugin to be installed and activated on the WordPress website. 
+
+The form fields used to capture the UTM values must be labeled as "utm_source", "utm_medium", and "utm_campaign".
+
+The plugin enqueues two JavaScript files, "js-cookie" and "mam_utm_forms", which are used to set and retrieve cookies for the UTM values. 
+
+The plugin sets a cookie with the UTM values when a user first visits the website and then retrieves the values and populates the corresponding form fields when the user submits a form.
+
+The "quform_pre_display" action is used to retrieve the form fields labeled as "utm_source", "utm_medium", and "utm_campaign", and populate their values with the corresponding UTM cookie values. 
+
+The script is wrapped in a jQuery document ready function and window load event to ensure that the form fields are populated after the DOM has fully loaded.
+
 
 **Installation and Configuration** 
 
 - Download the latest release here https://github.com/moveaheadmedia/mam-quform-utms/releases
 - Install and activate the plugin on your website
-- Add the following hidden fields to your Quform form, the labels must be  `utm_source`, `utm_medium` and `utm_campaign`.
+- Add the following hidden fields to your Quform forms, the labels must be  `utm_source`, `utm_medium` and `utm_campaign`.
 
-That's it. the plugin will automatically populate those hidden fields with the UTMs data from the users when they submit.
+That's it. the plugin will automatically populate those hidden fields with the UTMs data from the cookies before the users submit the forms.
 
-**Changelog v1.3**
+**Changelog**
 
+***1.4 (latest)***
+- Changed from using PHP to save and return cookies data to use only Javascript
+- Fixed "Referral" users being tracked as "Direct"
+
+***1.3***
 - Changed from session to cookies
 - Fixed Direct users not being tracked
