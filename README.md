@@ -29,7 +29,10 @@ That's it. the plugin will automatically populate those hidden fields with the U
 
 **Changelog**
 
-***1.4 (latest)***
+***1.4.1 (latest)***
+- Fix Referral Not Tracked If The User Visited Direct Before
+
+***1.4***
 - Changed from using PHP to save and return cookies data to use only Javascript
 - Fixed "Referral" users being tracked as "Direct"
 
