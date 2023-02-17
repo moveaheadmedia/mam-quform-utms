@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
         }
 
         // if the cookie is not set then generate automated cookie
-        if (!Cookies.get('user_utm_source')) {
+        if (!Cookies.get('user_utm_source') || Cookies.get('user_utm_source') === 'Direct' ) {
             if (mam_utm_referral !== '') {
                 Cookies.set('user_utm_source', 'Referral');
             } else {
@@ -26,7 +26,7 @@ jQuery(document).ready(function () {
         }
 
         // if the cookie is not set then generate automated cookie
-        if (!Cookies.get('user_utm_medium')) {
+        if (!Cookies.get('user_utm_medium') || Cookies.get('user_utm_medium') === '-') {
             if (mam_utm_referral !== '') {
                 Cookies.set('user_utm_medium', mam_utm_referral);
             } else {
