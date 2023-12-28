@@ -23,6 +23,7 @@ The script is wrapped in a jQuery document ready function and window load event 
 
 - Download the latest release here https://github.com/moveaheadmedia/mam-quform-utms/releases
 - Install and activate the plugin on your website
+- Or you can just add this php code using Code Snippets plugin or past it to your functions.php https://gist.github.com/alisalti1992/e90ad04b3c1bafee63bb964df1a8a428
 - Add the following hidden fields to your Quform forms, the labels must be  `utm_source`, `utm_medium` and `utm_campaign`.
 
 That's it. the plugin will automatically populate those hidden fields with the UTMs data from the cookies before the users submit the forms.
