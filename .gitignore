@@ -1,0 +1,11 @@
+# Editor / IDE settings (ftp-kr.json holds deploy credentials — never commit)
+.vscode/
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Local env / secrets
+.env
+*.local
