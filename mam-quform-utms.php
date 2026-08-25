@@ -3,7 +3,7 @@
  * Plugin Name: Move Ahead Media UTM To Forms
  * Plugin URI: https://github.com/moveaheadmedia/mam-utm-to-forms/
  * Description: The purpose of this plugin is to allow the website owner to track the UTM values of the users who submit the form, jQuery and Quform Hidden Field Names must be labeled `utm_source`, `utm_medium` and `utm_campaign`.
- * Version: 1.4.1
+ * Version: 1.4.3
  * Author: Move Ahead Media
  * Author URI: https://github.com/moveaheadmedia
  * Requires jQuery and Quform Hidden Field Names must be labeled `utm_source`, `utm_medium` and `utm_campaign`.
@@ -21,7 +21,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		'mam_utm_forms',
 		plugin_dir_url( __FILE__ ) . '/scripts.js',
 		[ 'jquery', 'js-cookie' ],
-		'1.4.1'
+		'1.4.3'
 	);
 
     // Send current domain to the scripts.js
@@ -71,7 +71,27 @@ add_action( 'quform_pre_display', function ( Quform_Form $form ) {
                 <?php
                 }
                 ?>
-            })
+            });
+			
+            setInterval(function(){
+                <?php
+                foreach ($utm_source as $element_name){
+                ?>
+                $('input[name="<?php echo $element_name; ?>"]').val(Cookies.get('user_utm_source'));
+                <?php
+                }
+                foreach ($utm_medium as $element_name){
+                ?>
+                $('input[name="<?php echo $element_name; ?>"]').val(Cookies.get('user_utm_medium'));
+                <?php
+                }
+                foreach ($utm_campaign as $element_name){
+                ?>
+                $('input[name="<?php echo $element_name; ?>"]').val(Cookies.get('user_utm_campaign'));
+                <?php
+                }
+                ?>
+            }, 500);
         });
     </script>
 	<?php
