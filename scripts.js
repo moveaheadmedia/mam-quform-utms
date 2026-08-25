@@ -3,7 +3,8 @@
  * ---------------------------------------------------------------------------
  * EXPLICIT UTM PARAMS (from URL) — normalised in this order, then stored:
  *   utm_source/medium contains 'clutch.co'                              => Source: Referral | Medium: Third-party Sites | Campaign: clutch.co
- *   utm_source contains chatgpt/openai/claude/gemini/perplexity/copilot => Source: Referral | Medium: LLM              | Campaign: <source>
+ *   utm_source contains 'chatgpt' AND utm_medium = 'cpc'                => stored as-is (paid ChatGPT: Source: <source> | Medium: cpc | Campaign: <campaign>)
+ *   utm_source contains chatgpt/openai/claude/gemini/perplexity/copilot => Source: Referral | Medium: <medium> or LLM   | Campaign: <campaign> or <source>
  *   utm_source = 'mamgbp'                                               => Source: Google   | Medium: Organic           | Campaign: GBP
  *   utm_source contains 'facebook'                                     => Source: Meta     | Medium: (if 'social' => Organic_FB, else as-is) | Campaign: as-is
  *   utm_source contains 'instagram'                                    => Source: Meta     | Medium: (if 'social' => Organic_IG, else as-is) | Campaign: as-is
@@ -98,10 +99,15 @@ jQuery(document).ready(function () {
             return { source: source, medium: medium, campaign: campaign };
         }
         const s = source.toLowerCase();
+        const m = (medium || '').toLowerCase();
         const llmNeedles = ['chatgpt', 'openai', 'claude', 'gemini', 'perplexity', 'copilot'];
         for (let i = 0; i < llmNeedles.length; i++) {
             if (s.indexOf(llmNeedles[i]) !== -1) {
-                return { source: 'Referral', medium: 'LLM', campaign: source };
+                // Paid ChatGPT traffic (chatgpt / cpc) keeps its own source, medium and campaign.
+                if (s.indexOf('chatgpt') !== -1 && m === 'cpc') {
+                    return { source: source, medium: medium, campaign: campaign };
+                }
+                return { source: 'Referral', medium: medium || 'LLM', campaign: campaign || source };
             }
         }
         return { source: source, medium: medium, campaign: campaign };

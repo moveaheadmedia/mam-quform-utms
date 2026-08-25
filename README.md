@@ -30,7 +30,14 @@ That's it. the plugin will automatically populate those hidden fields with the U
 
 **Changelog**
 
-***1.4.1 (latest)***
+***1.4.4 (latest)***
+- Paid ChatGPT traffic (`utm_source=chatgpt` with `utm_medium=cpc`) is now stored as-is, keeping its own source, medium and campaign
+- Other LLM sources now keep the `utm_medium` and `utm_campaign` values from the URL when they are present, instead of always being overwritten with `LLM` and the source name
+
+***1.4.3***
+- Attribution classification for LLM, Meta, Google and Clutch referrals
+
+***1.4.1***
 - Fix Referral Not Tracked If The User Visited Direct Before
 
 ***1.4***
